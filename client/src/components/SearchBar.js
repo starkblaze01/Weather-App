@@ -14,9 +14,9 @@ class SearchBar extends Component {
 
     render(){
         return (
-            <div>
+            <div style={{height: '10vh'}}>
                 <AutoComplete style={{ width: '100%', boxShadow: '5px 5px 50px -8px grey', borderRadius: '8px'}}>
-                    <Input prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />} size="large" suffix={<SearchOutlined />}/>
+                    <Input prefix={<FontAwesomeIcon icon={faMapMarkerAlt} />} size="large" suffix={<SearchOutlined />} style={{ borderRadius: '8px'}}/>
                 </AutoComplete>
             </div>
 
