@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { Line } from '@';
-import { Row, Col } from 'antd';
+import { Card } from 'antd';
 
 class Chart extends Component {
 
@@ -14,9 +14,9 @@ class Chart extends Component {
 
     render() {
         return (
-            <Row>
+            <Card style={{ height: '60vh', boxShadow: '5px 5px 50px -8px grey', borderRadius: '8px'}}>
                 hey there!
-            </Row>
+            </Card>
         );
     }
 
