@@ -6,7 +6,9 @@ import Chart from './components/Chart';
 import Days from './components/Days';
 
 function App() {
-
+  useEffect(() => {
+    console.log('api call here')
+  });
   return (
     <div className="App" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '90vh'}}>
       <SearchBar/>
