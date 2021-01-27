@@ -5,15 +5,15 @@ class Days extends Component {
     render() {
         
         return (
-            <Row style={{height: '20vh', display: 'inline-flex', justifyContent: 'space-between', overflow: 'auto'}}>
+            <Row style={{height: '20vh', display: 'inline-flex', justifyContent: 'space-between', overflow: 'auto', whiteSpace:'nowrap'}}>
                 <Col>
+                    <Row>Sun 1</Row>
                     <Row>Sun</Row>
-                    <Row>Sun</Row>
-                    <Row>Sun dckndskcndddddddd</Row>
+                    <Row>Sun knnnjnjnjnmnnmmmmmn mn</Row>
                     <Row>Sun</Row>
                 </Col>
                 <Col>
-                    <Row>Mon cdcdcdd</Row>
+                    <Row>Mon</Row>
                     <Row>Sun</Row>
                     <Row>Sun</Row>
                     <Row>Sun</Row>
