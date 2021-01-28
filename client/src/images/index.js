@@ -1,0 +1,11 @@
+export const clearSkyDay = require('./021-sun.svg');
+export const clearSkyNight = require('./021-night-1.svg');
+export const fewCloudsDay = require('./021-cloudy-1.svg');
+export const fewCloudsNight = require('./021-cloudy.svg');
+export const scatteredClouds = require('./021-cloud.svg');
+export const brokenClouds = require('./021-cloud.svg');
+export const thunderStorm = require('./021-storm.svg');
+export const showerRain = require('./021-rain.svg');
+export const rain = require('./021-rain-2.svg');
+export const snow = require('./021-snowflake.svg');
+export const mist = require('./021-tornado.svg');
