@@ -52,7 +52,7 @@ class Days extends Component {
     }
 
     render() {
-        const days = this.state.data ? this.state.data.daily.map(el =>  <Col key={el.dt}>
+        const days = this.state.data ? this.state.data.daily.map(el =>  <Col key={el.dt} style={{minWidth: '90px'}}>
             <Row>
                 <Text strong style={{ margin: 'auto' }}>
                     {this.state.day[new Date(el.dt * 1000).getDay()]}
@@ -81,7 +81,7 @@ class Days extends Component {
         </Col>) : ''
 
         return (
-            <Row style={{height: '20vh', display: 'inline-flex', overflow: 'auto', whiteSpace:'nowrap', flexFlow: 'row'}}>
+            <Row style={{height: '20vh', display: 'inline-flex', overflow: 'auto', whiteSpace:'nowrap', flexFlow: 'row'}} gutter={8}>
                 {days}
 
             </Row>
