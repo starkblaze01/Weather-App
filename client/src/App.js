@@ -12,9 +12,9 @@ function App() {
 
   useEffect(() => {
     console.log('api call here')
-    axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${location.lat}&lon=${location.lon}&exclude=hourly,daily&appid=fbcfad8f3a5d45c7b97c8fbd25753395`).then(res => {
-      console.log(res.data);
-    })
+    // axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${location.lat}&lon=${location.lon}&exclude=hourly,daily&appid=fbcfad8f3a5d45c7b97c8fbd25753395`).then(res => {
+    //   console.log(res.data);
+    // })
   });
   return (
     <div className="App" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '90vh'}}>

@@ -45,57 +45,45 @@ class Days extends Component {
     }
     async componentDidMount(){
         console.log('api call here_days')
-        axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${this.state.location.lat}&lon=${this.state.location.lon}&appid=fbcfad8f3a5d45c7b97c8fbd25753395`).then(res => {
+        axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${this.state.location.lat}&lon=${this.state.location.lon}&units=metric&exclude=minutely,hourly&appid=fbcfad8f3a5d45c7b97c8fbd25753395`).then(res => {
             this.setState({data: res.data})
             console.log(res.data);
         })
     }
 
     render() {
+        const days = this.state.data ? this.state.data.daily.map(el =>  <Col key={el.dt} style={{minWidth: '90px'}}>
+            <Row>
+                <Text strong style={{ margin: 'auto' }}>
+                    {this.state.day[new Date(el.dt * 1000).getDay()]}
+                </Text>
+            </Row>
+            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                <Col span={12}>
+                    <Text strong>
+                        {el.temp.max.toFixed(1)}&deg;
+                            </Text>
+                </Col>
+                <Col span={12}>
+                    <Text strong>
+                        {el.temp.min.toFixed(1)}&deg;
+                    </Text>
+                </Col>
+            </Row>
+            <Row>
+                {<img style={{ margin: 'auto', maxHeight: '30px' }} src={this.state.icon[el.weather[0].icon].default} alt={el.weather[0].icon} />}
+            </Row>
+            <Row>
+                <Text type="secondary" style={{ margin: 'auto', padding: '2px' }}>
+                    {el.weather[0].main}
+                </Text>
+            </Row>
+        </Col>) : ''
+
         return (
-            <Row style={{height: '20vh', display: 'inline-flex', overflow: 'auto', whiteSpace:'nowrap'}}>
-                <Col>
-                    <Row><Text strong>{this.state.data ? this.state.day[new Date(this.state.data.dt * 1000).getDay()] : ''}</Text></Row>
-                    <Row>{this.state.data ? '' : ''}</Row>
-                    <Row>{this.state.data ? '' : '' }</Row>
-                    <Row>{ this.state.data ? <img src={this.state.icon[this.state.data.weather[0].icon].default} alt="some"/> : ''}</Row>
-                </Col>
-                <Col>
-                    <Row>Mon</Row>
-                    <Row>Sun</Row>
-                    <Row>Sun</Row>
-                    <Row>Sun</Row>
-                </Col>
-                <Col>
-                    <Row>Tue</Row>
-                    <Row>Sun</Row>
-                    <Row>Sun</Row>
-                    <Row>Sun</Row>
-                </Col>
-                <Col>
-                    <Row>Wed</Row>
-                    <Row>Sun</Row>
-                    <Row>Sun</Row>
-                    <Row>Sun</Row>
-                </Col>
-                <Col>
-                    <Row>Thurs</Row>
-                    <Row>Sun</Row>
-                    <Row>Sun</Row>
-                    <Row>Sun</Row>
-                </Col>
-                <Col>
-                    <Row>Fri</Row>
-                    <Row>Sun</Row>
-                    <Row>Sun</Row>
-                    <Row>Sun</Row>
-                </Col>
-                <Col>
-                    <Row>Sat</Row>
-                    <Row>Sun</Row>
-                    <Row>Sun</Row>
-                    <Row>Sun</Row>
-                </Col>
+            <Row style={{height: '20vh', display: 'inline-flex', overflow: 'auto', whiteSpace:'nowrap', flexFlow: 'row'}} gutter={8}>
+                {days}
+
             </Row>
         );
     }
