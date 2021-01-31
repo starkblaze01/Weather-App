@@ -1,6 +1,5 @@
 import React,  { Component } from 'react';
 import { Row, Col, Typography} from 'antd';
-import axios from 'axios';
 import { clearSkyDay, clearSkyNight, fewCloudsDay, fewCloudsNight, scatteredClouds, brokenClouds, thunderStorm, showerRain, rain, snow, mist} from '../images';
 const { Text } = Typography;
 
@@ -8,9 +7,6 @@ class Days extends Component {
     constructor(props){
         super(props);
         this.state ={
-            location:{
-                lat: 33.441792, lon: -94.037689 
-            },
             icon:{
                 '01d': clearSkyDay,
                 '01n': clearSkyNight,
@@ -31,7 +27,6 @@ class Days extends Component {
                 '50d': mist,
                 '50n': mist
             },
-            data: '',
             day: {
                 0: 'Sun',
                 1: 'Mon',
@@ -43,16 +38,9 @@ class Days extends Component {
             }
         }
     }
-    async componentDidMount(){
-        console.log('api call here_days')
-        axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${this.state.location.lat}&lon=${this.state.location.lon}&units=metric&exclude=minutely,hourly&appid=fbcfad8f3a5d45c7b97c8fbd25753395`).then(res => {
-            this.setState({data: res.data})
-            console.log(res.data);
-        })
-    }
 
     render() {
-        const days = this.state.data ? this.state.data.daily.map(el =>  <Col key={el.dt} style={{minWidth: '90px'}}>
+        const days = this.props.data ? this.props.data.daily.map(el =>  <Col key={el.dt} style={{minWidth: '90px'}}>
             <Row>
                 <Text strong style={{ margin: 'auto' }}>
                     {this.state.day[new Date(el.dt * 1000).getDay()]}
@@ -65,7 +53,7 @@ class Days extends Component {
                             </Text>
                 </Col>
                 <Col span={12}>
-                    <Text strong>
+                    <Text type="secondary">
                         {el.temp.min.toFixed(1)}&deg;
                     </Text>
                 </Col>
