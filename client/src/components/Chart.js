@@ -4,7 +4,7 @@ import { Card } from 'antd';
 import { Typography, Row, Col } from 'antd';
 import { clearSkyDay, clearSkyNight, fewCloudsDay, fewCloudsNight, scatteredClouds, brokenClouds, thunderStorm, showerRain, rain, snow, mist } from '../images';
 
-const {Title} = Typography;
+const {Title, Text} = Typography;
 
 class Chart extends Component {
 
@@ -37,11 +37,25 @@ class Chart extends Component {
     }
 
     render() {
+        if(this.props.data){
+            console.log(this.props.data.hourly.map(el => {
+                let hours = ''
+                if (new Date(el.dt * 1000).getHours() === 12){
+                    hours = '12pm'
+                } else if (new Date(el.dt * 1000).getHours() === 0){
+                    hours = '12am'
+                } else if (new Date(el.dt * 1000).getHours() > 12){
+                    hours = (new Date(el.dt * 1000).getHours() - 12).toString() + 'pm'
+                } else {
+                    hours = new Date(el.dt * 1000).getHours().toString() + 'am'
+                }
+                return [el.temp, hours]
+            }));
+        }
         const data = {
-            labels: ['1', '2', '3', '4', '5', '6'],            
             datasets: [
                 {
-                    data: [12, 19, 3, 5, 2, 3],
+                    data: this.props.data.hourly ? this.props.data.hourly.map(el => el.temp) : [12, 19, 3, 5, 2, 3],
                     fill: false,
                     backgroundColor: 'rgb(39, 221, 245)',
                     borderColor: 'rgba(39, 221, 245, 0.5)',
@@ -54,18 +68,47 @@ class Chart extends Component {
         }
         const options = { 
                 legend: {
-                    display: false
+                    display: false,
                 },
                 
                 scales: {
                     yAxes: [{
                         gridLines: {
+                            display: false,
+                            zeroLineColor: 'rgba(0,0,0,0)',
+                            drawBorder: false,
+                        },
+                        ticks: {
                             display: false
                         }
                     }],
                     xAxes: [{
+                        labels: this.props.data ? this.props.data.hourly.map(el => {
+                            let hours = ''
+                            if (new Date(el.dt * 1000).getHours() === 12) {
+                                hours = '12pm'
+                            } else if (new Date(el.dt * 1000).getHours() === 0) {
+                                hours = '12am'
+                            } else if (new Date(el.dt * 1000).getHours() > 12) {
+                                hours = (new Date(el.dt * 1000).getHours() - 12).toString() + 'pm'
+                            } else {
+                                hours = new Date(el.dt * 1000).getHours().toString() + 'am'
+                            }
+                            return [el.temp.toString() + '\u00B0' , hours]
+                        }) :  ['1', '2', '3', '4', '5', '6'],
+                        ticks: {
+                            fontStyle: 'bold,normal'
+                            // major:{
+                            //     fontStyle: 'bold',
+                            // },
+                            // minor: {
+                            //     fontStyle: 'bold'
+                            // }
+                        },
+
                         gridLines: {
-                            display: false
+                            drawBorder: false,
+                            zeroLineColor: 'rgba(0,0,0,0.1)',
                         }
                     }]
                 }
@@ -73,7 +116,7 @@ class Chart extends Component {
                                         
 
         return (
-            <Card style={{ height: '60vh', boxShadow: '5px 5px 50px -8px grey', borderRadius: '8px'}}>
+            <Card style={{ height: '70vh', boxShadow: '5px 5px 50px -8px grey', borderRadius: '8px'}}>
                 <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32}} style={{width: '100%'}}>
                     <Col span={15}>
                         {this.props.data ? <Title>{this.props.data.current.temp.toFixed(1)}&deg;C</Title> : ''} 
@@ -84,7 +127,28 @@ class Chart extends Component {
                     <Col >
                     </Col>
                 </Row>
-                <Line data={data} options={options}/>
+                <div style={{overflow: 'scroll'}}>
+                    <Line data={data} options={options}/>
+                </div>
+                <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32}}>
+                    <Col span={10} style={{ background: 'rgba(39, 221, 245, 0.15)'}}>
+                        <Row style={{marginLeft: '5px', marginTop: '5px' }}>
+                            <Text strong>Pressure</Text>
+                        </Row>
+                        <Row style={{ marginLeft: '5px', marginBottom: '5px' }}>
+                            <Text strong>{this.props.data ? this.props.data.current.pressure : ''} hpa </Text>
+                        </Row>
+                    </Col>
+                    <Col span={4}></Col>
+                    <Col span={10} style={{ background: 'rgba(39, 221, 245, 0.15)'}}>
+                        <Row style={{ marginLeft: '5px', marginTop: '5px'}}>
+                            <Text strong>Humidity</Text>
+                        </Row>
+                        <Row style={{ marginLeft: '5px', marginBottom: '5px' }}>
+                            <Text strong>{this.props.data ? this.props.data.current.humidity : ''} %</Text>
+                        </Row>
+                    </Col>
+                </Row>
             </Card>
         );
     }
