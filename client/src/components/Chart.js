@@ -37,21 +37,6 @@ class Chart extends Component {
     }
 
     render() {
-        if(this.props.data){
-            console.log(this.props.data.hourly.map(el => {
-                let hours = ''
-                if (new Date(el.dt * 1000).getHours() === 12){
-                    hours = '12pm'
-                } else if (new Date(el.dt * 1000).getHours() === 0){
-                    hours = '12am'
-                } else if (new Date(el.dt * 1000).getHours() > 12){
-                    hours = (new Date(el.dt * 1000).getHours() - 12).toString() + 'pm'
-                } else {
-                    hours = new Date(el.dt * 1000).getHours().toString() + 'am'
-                }
-                return [el.temp, hours]
-            }));
-        }
         const data = {
             datasets: [
                 {
@@ -100,7 +85,7 @@ class Chart extends Component {
                             } else {
                                 hours = new Date(el.dt * 1000).getHours().toString() + 'am'
                             }
-                            return [el.temp.toString() + '\u00B0' , hours]
+                            return [el.temp.toFixed(1).toString() + '\u00B0' , hours]
                         }) :  ['1', '2', '3', '4', '5', '6'],
                         ticks: {
                             fontStyle: 'bold',
