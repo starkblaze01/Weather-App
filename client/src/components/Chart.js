@@ -62,24 +62,30 @@ class Chart extends Component {
                     pointRadius: 4,
                     pointBackgroundColor: 'rgb(255,255,255)',
                     pointBorderWidth: 2,
-                    pointBorderColor: 'rgb(39, 221, 245)'
+                    pointBorderColor: 'rgb(39, 221, 245)',
+                    spanGaps: true
                 },
             ],
         }
         const options = { 
+                responsive: true,
+                maintainAspectRatio: false,
+                // aspectRatio: 20,
                 legend: {
                     display: false,
                 },
                 
                 scales: {
                     yAxes: [{
+                        labels: [1,2,3,4,5,6,7],
                         gridLines: {
                             display: false,
                             zeroLineColor: 'rgba(0,0,0,0)',
                             drawBorder: false,
                         },
                         ticks: {
-                            display: false
+                            display: false,
+                            tickMarkLength: 5,
                         }
                     }],
                     xAxes: [{
@@ -97,13 +103,16 @@ class Chart extends Component {
                             return [el.temp.toString() + '\u00B0' , hours]
                         }) :  ['1', '2', '3', '4', '5', '6'],
                         ticks: {
-                            fontStyle: 'bold,normal'
+                            fontStyle: 'bold',
                             // major:{
                             //     fontStyle: 'bold',
                             // },
                             // minor: {
                             //     fontStyle: 'bold'
                             // }
+                            maxTicksLimit: 48,
+                            tickMarkLength: 400,
+                            circular: true
                         },
 
                         gridLines: {
@@ -127,8 +136,10 @@ class Chart extends Component {
                     <Col >
                     </Col>
                 </Row>
-                <div style={{overflow: 'scroll'}}>
-                    <Line data={data} options={options}/>
+                <div style={{ overflow: 'scroll' }}>
+                    <div style={{ width: '2000px'}}>
+                        <Line data={data} options={options}/>
+                    </div>
                 </div>
                 <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32}}>
                     <Col span={10} style={{ background: 'rgba(39, 221, 245, 0.15)'}}>
