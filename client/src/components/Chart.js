@@ -55,14 +55,13 @@ class Chart extends Component {
         const options = { 
                 responsive: true,
                 maintainAspectRatio: false,
-                // aspectRatio: 20,
                 legend: {
                     display: false,
                 },
                 
                 scales: {
                     yAxes: [{
-                        labels: [1,2,3,4,5,6,7],
+                        // labels: [1,2,3,4,5,6,7],
                         gridLines: {
                             display: false,
                             zeroLineColor: 'rgba(0,0,0,0)',
@@ -89,12 +88,6 @@ class Chart extends Component {
                         }) :  ['1', '2', '3', '4', '5', '6'],
                         ticks: {
                             fontStyle: 'bold',
-                            // major:{
-                            //     fontStyle: 'bold',
-                            // },
-                            // minor: {
-                            //     fontStyle: 'bold'
-                            // }
                             maxTicksLimit: 48,
                             tickMarkLength: 400,
                             circular: true
@@ -107,6 +100,57 @@ class Chart extends Component {
                     }]
                 }
             }
+        const data1 = {
+            datasets: [
+                {
+                    data: [-1, 0, 1, 0, -1],
+                    fill: true,
+                    backgroundColor: 'rgba(255, 255, 0, 0.5)',
+                    borderColor: 'rgb(255, 255, 0)',
+                    pointRadius: [0,0,10,0,0],
+                    pointHoverRadius: [0,0,20,0,0],
+                    pointHoverBackgroundColor: 'rgb(255, 255, 0)',
+                    pointStyle: 'star',
+                    pointBorderWidth: 2,
+                    spanGaps: true
+                },
+            ],
+        }   
+        const options1 = {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                // display: false,
+            },
+            scales: {
+                yAxes: [{
+                    // labels: [1,2,3,4,5,6,7],
+                    gridLines: {
+                        display: false,
+                        zeroLineColor: 'rgba(0,0,0,0)',
+                        drawBorder: false,
+                    },
+                    ticks: {
+                        display: false,
+                        tickMarkLength: 5,
+                    }
+                }],
+                xAxes: [{
+                    labels: [1, 2, 3, 4, 5],
+                    ticks: {
+                        fontStyle: 'bold',
+                        // maxTicksLimit: 48,
+                        // tickMarkLength: 400,
+                        circular: true
+                    },
+
+                    gridLines: {
+                        drawBorder: false,
+                        zeroLineColor: 'rgba(0,0,0,0.1)',
+                    }
+                }]
+            }
+        } 
                                         
 
         return (
@@ -166,6 +210,9 @@ class Chart extends Component {
                         </Row>
                     </Col>
                 </Row>
+                <div>
+                    <Line data={data1} options={options1} />
+                </div>
             </Card>
         );
     }
