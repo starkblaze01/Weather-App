@@ -55,14 +55,13 @@ class Chart extends Component {
         const options = { 
                 responsive: true,
                 maintainAspectRatio: false,
-                // aspectRatio: 20,
                 legend: {
                     display: false,
                 },
                 
                 scales: {
                     yAxes: [{
-                        labels: [1,2,3,4,5,6,7],
+                        // labels: [1,2,3,4,5,6,7],
                         gridLines: {
                             display: false,
                             zeroLineColor: 'rgba(0,0,0,0)',
@@ -89,12 +88,6 @@ class Chart extends Component {
                         }) :  ['1', '2', '3', '4', '5', '6'],
                         ticks: {
                             fontStyle: 'bold',
-                            // major:{
-                            //     fontStyle: 'bold',
-                            // },
-                            // minor: {
-                            //     fontStyle: 'bold'
-                            // }
                             maxTicksLimit: 48,
                             tickMarkLength: 400,
                             circular: true
@@ -107,10 +100,61 @@ class Chart extends Component {
                     }]
                 }
             }
+        const data1 = {
+            datasets: [
+                {
+                    data: [-1, 0, 1, 0, -1],
+                    fill: true,
+                    backgroundColor: 'rgba(255, 255, 0, 0.5)',
+                    borderColor: 'rgb(255, 255, 0)',
+                    pointRadius: [0,0,10,0,0],
+                    pointHoverRadius: [0,0,20,0,0],
+                    pointHoverBackgroundColor: 'rgb(255, 255, 0)',
+                    pointStyle: 'star',
+                    pointBorderWidth: 2,
+                    spanGaps: true
+                },
+            ],
+        }   
+        const options1 = {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                // display: false,
+            },
+            scales: {
+                yAxes: [{
+                    // labels: [1,2,3,4,5,6,7],
+                    gridLines: {
+                        display: false,
+                        zeroLineColor: 'rgba(0,0,0,0)',
+                        drawBorder: false,
+                    },
+                    ticks: {
+                        display: false,
+                        tickMarkLength: 5,
+                    }
+                }],
+                xAxes: [{
+                    labels: [1, 2, 3, 4, 5],
+                    ticks: {
+                        fontStyle: 'bold',
+                        // maxTicksLimit: 48,
+                        // tickMarkLength: 400,
+                        circular: true
+                    },
+
+                    gridLines: {
+                        drawBorder: false,
+                        zeroLineColor: 'rgba(0,0,0,0.1)',
+                    }
+                }]
+            }
+        } 
                                         
 
         return (
-            <Card style={{ height: '70vh', boxShadow: '5px 5px 50px -8px grey', borderRadius: '8px'}}>
+            <Card style={{ height: '80vh', boxShadow: '5px 5px 50px -8px grey', borderRadius: '8px'}}>
                 <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32}} style={{width: '100%'}}>
                     <Col span={15}>
                         {this.props.data ? <Title>{this.props.data.current.temp.toFixed(1)}&deg;C</Title> : ''} 
@@ -145,6 +189,30 @@ class Chart extends Component {
                         </Row>
                     </Col>
                 </Row>
+                <br/>
+                <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                    <Col span={10}>
+                        <Row style={{ marginLeft: '5px', marginTop: '5px' }}>
+                            <Text strong>Sunrise</Text>
+                        </Row>
+                        <Row style={{ marginLeft: '5px', marginBottom: '5px' }}>
+                            <Text strong type="secondary">{this.props.data ? new Date(this.props.data.current.sunrise*1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone }) : ''}</Text>
+                        </Row>
+                    </Col>
+                    <Col span={4}></Col>
+                    <Col span={10}>
+                        <Row style={{ marginTop: '5px', justifyContent: 'flex-end'}}>
+                            <Text strong>Sunset</Text>
+                        </Row>
+                        <Row style={{ marginBottom: '5px', justifyContent: 'flex-end'}}>
+                            <Text strong type="secondary">{this.props.data ? new Date(this.props.data.current.sunset*1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone }) : ''}</Text>
+                            {console.log(this.props.data.timezone)}
+                        </Row>
+                    </Col>
+                </Row>
+                <div>
+                    <Line data={data1} options={options1} />
+                </div>
             </Card>
         );
     }
