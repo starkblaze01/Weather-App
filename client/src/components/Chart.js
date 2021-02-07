@@ -110,7 +110,7 @@ class Chart extends Component {
                                         
 
         return (
-            <Card style={{ height: '70vh', boxShadow: '5px 5px 50px -8px grey', borderRadius: '8px'}}>
+            <Card style={{ height: '80vh', boxShadow: '5px 5px 50px -8px grey', borderRadius: '8px'}}>
                 <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32}} style={{width: '100%'}}>
                     <Col span={15}>
                         {this.props.data ? <Title>{this.props.data.current.temp.toFixed(1)}&deg;C</Title> : ''} 
@@ -142,6 +142,27 @@ class Chart extends Component {
                         </Row>
                         <Row style={{ marginLeft: '5px', marginBottom: '5px' }}>
                             <Text strong>{this.props.data ? this.props.data.current.humidity : ''} %</Text>
+                        </Row>
+                    </Col>
+                </Row>
+                <br/>
+                <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                    <Col span={10}>
+                        <Row style={{ marginLeft: '5px', marginTop: '5px' }}>
+                            <Text strong>Sunrise</Text>
+                        </Row>
+                        <Row style={{ marginLeft: '5px', marginBottom: '5px' }}>
+                            <Text strong type="secondary">{this.props.data ? new Date(this.props.data.current.sunrise*1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone }) : ''}</Text>
+                        </Row>
+                    </Col>
+                    <Col span={4}></Col>
+                    <Col span={10}>
+                        <Row style={{ marginTop: '5px', justifyContent: 'flex-end'}}>
+                            <Text strong>Sunset</Text>
+                        </Row>
+                        <Row style={{ marginBottom: '5px', justifyContent: 'flex-end'}}>
+                            <Text strong type="secondary">{this.props.data ? new Date(this.props.data.current.sunset*1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone }) : ''}</Text>
+                            {console.log(this.props.data.timezone)}
                         </Row>
                     </Col>
                 </Row>
