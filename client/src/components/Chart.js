@@ -114,6 +114,18 @@ class Chart extends Component {
                     pointBorderWidth: 2,
                     spanGaps: true
                 },
+                {
+                    data: [-2, 0, 2, 0, -2],
+                    fill: true,
+                    backgroundColor: 'rgba(255, 255, 0, 0.5)',
+                    borderColor: 'rgb(255, 255, 0)',
+                    pointRadius: [0, 0, 10, 0, 0],
+                    pointHoverRadius: [0, 0, 20, 0, 0],
+                    pointHoverBackgroundColor: 'rgb(255, 255, 0)',
+                    pointStyle: 'star',
+                    pointBorderWidth: 2,
+                    spanGaps: true
+                },
             ],
         }   
         const options1 = {
