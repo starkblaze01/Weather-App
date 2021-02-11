@@ -19,7 +19,7 @@ function App() {
   },[location]);
 
   return (
-    <div className="App" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '90vh'}}>
+    <div className="App" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '105vh'}}>
       <SearchBar/>
       <Days data = {data}/>
       <Chart data={data}/>

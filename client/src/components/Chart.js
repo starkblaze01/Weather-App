@@ -103,9 +103,9 @@ class Chart extends Component {
         const data1 = {
             datasets: [
                 {
-                    data: [-1, 0, 1, 0, -1],
+                    data: [-2, 0, 0, 0, -2],
                     fill: true,
-                    backgroundColor: 'rgba(255, 255, 0, 0.5)',
+                    backgroundColor: '#838383',
                     borderColor: 'rgb(255, 255, 0)',
                     pointRadius: [0,0,10,0,0],
                     pointHoverRadius: [0,0,20,0,0],
@@ -115,7 +115,7 @@ class Chart extends Component {
                     spanGaps: true
                 },
                 {
-                    data: [-2, 0, 2, 0, -2],
+                    data: [0, 0, 2, 0, 0],
                     fill: true,
                     backgroundColor: 'rgba(255, 255, 0, 0.5)',
                     borderColor: 'rgb(255, 255, 0)',
@@ -148,7 +148,7 @@ class Chart extends Component {
                     }
                 }],
                 xAxes: [{
-                    labels: [1, 2, 3, 4, 5],
+                    labels: [1, this.props.data ? new Date(this.props.data.current.sunrise * 1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone }) : 2, 3, this.props.data ? new Date(this.props.data.current.sunset * 1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone }) : 4, 5],
                     ticks: {
                         fontStyle: 'bold',
                         // maxTicksLimit: 48,
@@ -163,7 +163,7 @@ class Chart extends Component {
                 }]
             }
         } 
-                                        
+
 
         return (
             <Card style={{ height: '80vh', boxShadow: '5px 5px 50px -8px grey', borderRadius: '8px'}}>

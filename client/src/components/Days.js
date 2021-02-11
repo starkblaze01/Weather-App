@@ -69,7 +69,7 @@ class Days extends Component {
         </Col>) : ''
 
         return (
-            <Row style={{height: '20vh', display: 'inline-flex', overflow: 'auto', whiteSpace:'nowrap', flexFlow: 'row'}} gutter={8}>
+            <Row style={{height: '15vh', display: 'inline-flex', overflow: 'auto', whiteSpace:'nowrap', flexFlow: 'row'}} gutter={8}>
                 {days}
 
             </Row>
