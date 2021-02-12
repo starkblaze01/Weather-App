@@ -100,32 +100,60 @@ class Chart extends Component {
                     }]
                 }
             }
+        let currentTime = [0, 0, 1, 2, 1, 0, 0];
+        let radius = [0, 0, 0, 0 ,0 , 0, 0];
+        let hover = [0, 0, 0, 0, 0, 0, 0];
+        if(this.props.data){
+            console.log('hello');
+            let sunrise, current, sunset;
+            sunrise = new Date(this.props.data.current.sunrise * 1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone })
+            sunset = new Date(this.props.data.current.sunset * 1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone })
+            current = new Date(this.props.data.current.dt * 1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone })
+            console.log('hello', sunrise, sunset, current);
+            if (current > sunrise && current <= (5*sunrise+3*sunset)/8){
+                currentTime = [0, 0, 1];
+                radius = [0, 0, 10];
+                hover =  [0, 0, 20];
+                console.log('1st');
+            } else if (current > (5 * sunrise + 3 * sunset) / 8 && current <= (5*sunset + 3*sunrise)/8){
+                currentTime = [0, 0, 1, 2];
+                radius = [0, 0, 0, 10];
+                hover = [0, 0, 0, 20];
+                console.log('2nd');
+            } else if (current > (5 * sunset + 3 * sunrise) / 8 && current <= (sunrise + 7*sunset)/8){
+                currentTime = [0, 0, 1, 2, 1];
+                radius = [0, 0, 0, 0, 10];
+                hover = [0, 0, 0, 0, 20];
+                console.log('3rd');
+            }
+        }
         const data1 = {
             datasets: [
                 {
-                    data: [-2, 0, 0, 0, -2],
+                    data: [-2, 0, 0, 0, 0, 0, -2],
                     fill: true,
                     backgroundColor: '#838383',
-                    borderColor: 'rgb(255, 255, 0)',
-                    pointRadius: [0,0,10,0,0],
-                    pointHoverRadius: [0,0,20,0,0],
+                    borderColor: '#838383',
+                    // borderWidth: '0px',
+                    pointRadius: [0,0,0,0,0,0,0],
+                    pointHoverRadius: [0,0,0,0,0,0,0],
                     pointHoverBackgroundColor: 'rgb(255, 255, 0)',
-                    pointStyle: 'star',
                     pointBorderWidth: 2,
-                    spanGaps: true
+                    spanGaps: false
                 },
                 {
-                    data: [0, 0, 2, 0, 0],
+                    data: currentTime,
                     fill: true,
                     backgroundColor: 'rgba(255, 255, 0, 0.5)',
+                    borderWidth: '0px',
                     borderColor: 'rgb(255, 255, 0)',
-                    pointRadius: [0, 0, 10, 0, 0],
-                    pointHoverRadius: [0, 0, 20, 0, 0],
+                    pointRadius: radius,
+                    pointHoverRadius: hover,
                     pointHoverBackgroundColor: 'rgb(255, 255, 0)',
                     pointStyle: 'star',
                     pointBorderWidth: 2,
-                    spanGaps: true
-                },
+                    spanGaps: false
+                }
             ],
         }   
         const options1 = {
@@ -148,7 +176,7 @@ class Chart extends Component {
                     }
                 }],
                 xAxes: [{
-                    labels: [1, this.props.data ? new Date(this.props.data.current.sunrise * 1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone }) : 2, 3, this.props.data ? new Date(this.props.data.current.sunset * 1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone }) : 4, 5],
+                    labels: ['', this.props.data ? new Date(this.props.data.current.sunrise * 1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone }) : '', '', '', '', this.props.data ? new Date(this.props.data.current.sunset * 1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone }) : '', ''],
                     ticks: {
                         fontStyle: 'bold',
                         // maxTicksLimit: 48,
