@@ -128,18 +128,34 @@ class Chart extends Component {
             }
         }
         const data1 = {
+            labels: ['', this.props.data ? new Date(this.props.data.current.sunrise * 1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone }) : '', '', '', '', this.props.data ? new Date(this.props.data.current.sunset * 1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone }) : '', ''],
+
             datasets: [
                 {
                     data: [-2, 0, 0, 0, 0, 0, -2],
                     fill: true,
                     backgroundColor: '#838383',
                     borderColor: '#838383',
-                    // borderWidth: '0px',
+                    borderWidth: '0px',
                     pointRadius: [0,0,0,0,0,0,0],
                     pointHoverRadius: [0,0,0,0,0,0,0],
+                    pointHoverBackgroundColor: '#838383',
+                    pointBorderWidth: 2,
+                    spanGaps: false,
+                    datasetKeyProvider: 'y'
+                },
+                {
+                    data: [0, 0, 1, 2, 1, 0, 0],
+                    fill: false,
+                    backgroundColor: 'rgba(255, 255, 0, 0.5)',
+                    borderColor: 'rgb(255, 255, 0)',
+                    // borderWidth: '0px',
+                    pointRadius: [0, 0, 0, 0, 0, 0, 0],
+                    pointHoverRadius: [0, 0, 0, 0, 0, 0, 0],
                     pointHoverBackgroundColor: 'rgb(255, 255, 0)',
                     pointBorderWidth: 2,
-                    spanGaps: false
+                    spanGaps: false,
+                    datasetKeyProvider: 'y1'
                 },
                 {
                     data: currentTime,
@@ -152,7 +168,8 @@ class Chart extends Component {
                     pointHoverBackgroundColor: 'rgb(255, 255, 0)',
                     pointStyle: 'star',
                     pointBorderWidth: 2,
-                    spanGaps: false
+                    spanGaps: false,
+                    datasetKeyProvider: 'y2'
                 }
             ],
         }   
@@ -165,6 +182,7 @@ class Chart extends Component {
             scales: {
                 yAxes: [{
                     // labels: [1,2,3,4,5,6,7],
+                    yAxisID: 'y',
                     gridLines: {
                         display: false,
                         zeroLineColor: 'rgba(0,0,0,0)',
@@ -176,7 +194,7 @@ class Chart extends Component {
                     }
                 }],
                 xAxes: [{
-                    labels: ['', this.props.data ? new Date(this.props.data.current.sunrise * 1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone }) : '', '', '', '', this.props.data ? new Date(this.props.data.current.sunset * 1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone }) : '', ''],
+                    // labels: ['', this.props.data ? new Date(this.props.data.current.sunrise * 1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone }) : '', '', '', '', this.props.data ? new Date(this.props.data.current.sunset * 1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone }) : '', ''],
                     ticks: {
                         fontStyle: 'bold',
                         // maxTicksLimit: 48,
