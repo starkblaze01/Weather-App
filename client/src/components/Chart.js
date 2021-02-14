@@ -37,6 +37,9 @@ class Chart extends Component {
     }
 
     render() {
+        const datasetKeyProvider = () => {
+            return btoa(Math.random()).substring(0, 12)
+        } 
         const data = {
             datasets: [
                 {
@@ -106,11 +109,21 @@ class Chart extends Component {
         if(this.props.data){
             console.log('hello');
             let sunrise, current, sunset;
-            sunrise = new Date(this.props.data.current.sunrise * 1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone })
-            sunset = new Date(this.props.data.current.sunset * 1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone })
-            current = new Date(this.props.data.current.dt * 1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone })
+            sunrise = Number(new Date(this.props.data.current.sunrise * 1000).toLocaleTimeString('en-GB', { timeZone: this.props.data.timezone }).split(':')[0])
+            sunset = Number(new Date(this.props.data.current.sunset * 1000).toLocaleTimeString('en-GB', { timeZone: this.props.data.timezone }).split(':')[0])
+            current = Number(new Date(this.props.data.current.dt * 1000).toLocaleTimeString('en-GB', { timeZone: this.props.data.timezone }).split(':')[0])
             console.log('hello', sunrise, sunset, current);
-            if (current > sunrise && current <= (5*sunrise+3*sunset)/8){
+            if (current <sunrise){
+                currentTime = [0, 0];
+                radius = [0, 0];
+                hover = [0, 0];
+                console.log('0th');
+            } else if (current === sunrise){
+                currentTime = [0, 0];
+                radius= [0, 10];
+                hover = [0, 20];
+                console.log('0th part2')
+            } else if (current > sunrise && current <= (5*sunrise+3*sunset)/8){
                 currentTime = [0, 0, 1];
                 radius = [0, 0, 10];
                 hover =  [0, 0, 20];
@@ -136,26 +149,22 @@ class Chart extends Component {
                     fill: true,
                     backgroundColor: '#838383',
                     borderColor: '#838383',
-                    borderWidth: '0px',
                     pointRadius: [0,0,0,0,0,0,0],
                     pointHoverRadius: [0,0,0,0,0,0,0],
                     pointHoverBackgroundColor: '#838383',
                     pointBorderWidth: 2,
                     spanGaps: false,
-                    datasetKeyProvider: 'y'
                 },
                 {
                     data: [0, 0, 1, 2, 1, 0, 0],
                     fill: false,
                     backgroundColor: 'rgba(255, 255, 0, 0.5)',
                     borderColor: 'rgb(255, 255, 0)',
-                    // borderWidth: '0px',
                     pointRadius: [0, 0, 0, 0, 0, 0, 0],
                     pointHoverRadius: [0, 0, 0, 0, 0, 0, 0],
                     pointHoverBackgroundColor: 'rgb(255, 255, 0)',
                     pointBorderWidth: 2,
                     spanGaps: false,
-                    datasetKeyProvider: 'y1'
                 },
                 {
                     data: currentTime,
@@ -169,7 +178,6 @@ class Chart extends Component {
                     pointStyle: 'star',
                     pointBorderWidth: 2,
                     spanGaps: false,
-                    datasetKeyProvider: 'y2'
                 }
             ],
         }   
@@ -177,11 +185,15 @@ class Chart extends Component {
             responsive: true,
             maintainAspectRatio: false,
             legend: {
-                // display: false,
+                display: false,
+            },
+            layout: {
+                padding: {
+                    top: 10,
+                }
             },
             scales: {
                 yAxes: [{
-                    // labels: [1,2,3,4,5,6,7],
                     yAxisID: 'y',
                     gridLines: {
                         display: false,
@@ -264,12 +276,11 @@ class Chart extends Component {
                         </Row>
                         <Row style={{ marginBottom: '5px', justifyContent: 'flex-end'}}>
                             <Text strong type="secondary">{this.props.data ? new Date(this.props.data.current.sunset*1000).toLocaleTimeString('en-US', { timeZone: this.props.data.timezone }) : ''}</Text>
-                            {console.log(this.props.data.timezone)}
                         </Row>
                     </Col>
                 </Row>
                 <div>
-                    <Line data={data1} options={options1} />
+                    <Line data={data1} options={options1} datasetKeyProvider={datasetKeyProvider}/>
                 </div>
             </Card>
         );
