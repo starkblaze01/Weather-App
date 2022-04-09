@@ -64,7 +64,6 @@ class Chart extends Component {
                 
                 scales: {
                     yAxes: [{
-                        // labels: [1,2,3,4,5,6,7],
                         gridLines: {
                             display: false,
                             zeroLineColor: 'rgba(0,0,0,0)',
@@ -107,37 +106,30 @@ class Chart extends Component {
         let radius = [0, 0, 0, 0 ,0 , 0, 0];
         let hover = [0, 0, 0, 0, 0, 0, 0];
         if(this.props.data){
-            console.log('hello');
             let sunrise, current, sunset;
             sunrise = Number(new Date(this.props.data.current.sunrise * 1000).toLocaleTimeString('en-GB', { timeZone: this.props.data.timezone }).split(':')[0])
             sunset = Number(new Date(this.props.data.current.sunset * 1000).toLocaleTimeString('en-GB', { timeZone: this.props.data.timezone }).split(':')[0])
             current = Number(new Date(this.props.data.current.dt * 1000).toLocaleTimeString('en-GB', { timeZone: this.props.data.timezone }).split(':')[0])
-            console.log('hello', sunrise, sunset, current);
             if (current <sunrise){
                 currentTime = [0, 0];
                 radius = [0, 0];
                 hover = [0, 0];
-                console.log('0th');
             } else if (current === sunrise){
                 currentTime = [0, 0];
                 radius= [0, 10];
                 hover = [0, 20];
-                console.log('0th part2')
             } else if (current > sunrise && current <= (5*sunrise+3*sunset)/8){
                 currentTime = [0, 0, 1];
                 radius = [0, 0, 10];
                 hover =  [0, 0, 20];
-                console.log('1st');
             } else if (current > (5 * sunrise + 3 * sunset) / 8 && current <= (5*sunset + 3*sunrise)/8){
                 currentTime = [0, 0, 1, 2];
                 radius = [0, 0, 0, 10];
                 hover = [0, 0, 0, 20];
-                console.log('2nd');
             } else if (current > (5 * sunset + 3 * sunrise) / 8 && current <= (sunrise + 7*sunset)/8){
                 currentTime = [0, 0, 1, 2, 1];
                 radius = [0, 0, 0, 0, 10];
                 hover = [0, 0, 0, 0, 20];
-                console.log('3rd');
             }
         }
         const data1 = {

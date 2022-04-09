@@ -69,13 +69,12 @@ class Days extends Component {
         </Col>) : ''
 
         return (
-            <Row style={{height: '15vh', display: 'inline-flex', overflow: 'auto', whiteSpace:'nowrap', flexFlow: 'row'}} gutter={8}>
+            <Row style={{height: '15vh', display: 'inline-flex', overflow: 'auto', whiteSpace:'nowrap', flexFlow: 'row', justifyContent: 'space-between'}} gutter={8}>
                 {days}
 
             </Row>
         );
     }
 }
-/* <div>Icons made by <a href="https://www.flaticon.com/authors/linector" title="Linector">Linector</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> */ 
 
 export default Days;
