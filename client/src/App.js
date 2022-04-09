@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     window.navigator.geolocation.getCurrentPosition(
       (position) => {
-        axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&exclude=minutely&appid=${process.env.REACT_OPEN_WEATHER_APP_API_KEY}`).then(res => {
+        axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&exclude=minutely&appid=${process.env.REACT_APP_OPEN_WEATHER_APP_API_KEY}`).then(res => {
           setData(res.data)
           console.log(res.data);
         }).catch(err => {
@@ -21,7 +21,7 @@ function App() {
       },
       (error) => {
         console.log(error);
-        axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${33.441792}&lon=${-94.037689}&units=metric&exclude=minutely&appid=${process.env.REACT_OPEN_WEATHER_APP_API_KEY}`).then(res => {
+        axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${33.441792}&lon=${-94.037689}&units=metric&exclude=minutely&appid=${process.env.REACT_APP_OPEN_WEATHER_APP_API_KEY}`).then(res => {
           setData(res.data)
           console.log(res.data);
         }).catch(err => {
@@ -37,7 +37,7 @@ function App() {
   },[]);
 
   const getCoordinatesWeather = (coord) => {
-    axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&units=metric&exclude=minutely&appid=${process.env.REACT_OPEN_WEATHER_APP_API_KEY}`).then(res => {
+    axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&units=metric&exclude=minutely&appid=${process.env.REACT_APP_OPEN_WEATHER_APP_API_KEY}`).then(res => {
       setData(res.data)
       console.log(res.data);
     }).catch(err => {
