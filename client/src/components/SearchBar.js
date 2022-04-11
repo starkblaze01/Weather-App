@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { SearchOutlined} from '@ant-design/icons';
 import debounce from 'lodash.debounce';
-import axios from 'axios';
 
 class SearchBar extends Component {
     constructor(props){
@@ -16,20 +15,40 @@ class SearchBar extends Component {
 
 
     onSearch = (searchText) => {
-        axios.get(`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${searchText}&locationbias=ipbias&key=${process.env.REACT_APP_GOOGLE_MAPS_PLACE_API_KEY}`).then(res => {
-            if(res.data){
-            this.setState({
-                options: res.data.predictions.length ? res.data.predictions.map(el => { return { value: el.description } }) : [{ value: 'Mumbai' }, { value: 'Varanasi' }, { value: 'Pune' }]
-            })}
-        })
+        if(searchText === ''){
+            return;
+        }
+        var service;
+        service = new window.google.maps.places.AutocompleteService(document.getElementById('map'));
+        service.getQueryPredictions({ input: searchText }, (predictions, status) => {
+            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+                this.setState({
+                    options: predictions.map(prediction => ({
+                        value: prediction.description,
+                        label: prediction.description,
+                        })
+                    )
+                });
+            } else {
+                console.log(status);
+            }
+        });
     }
 
     onOptionSelect = (value) => {
-        axios.get(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?fields=formatted_address,geometry&input=${value}&inputtype=textquery&locationbias=ipbias&language=en&key=${process.env.REACT_APP_GOOGLE_MAPS_PLACE_API_KEY}`).then(res => {
-            this.props.getCoordinatesWeather({ lat: res.data.candidates[0].geometry.location.lat, lon: res.data.candidates[0].geometry.location.lng });
-        }).catch(err => {
-            console.log(err);
-        })
+        var service;
+        service = new window.google.maps.places.PlacesService(document.getElementById('map'));
+        service.findPlaceFromQuery({
+            query: value,
+            fields: ['formatted_address', 'geometry']
+        }, (results, status) => {
+            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+                this.props.getCoordinatesWeather({lat: results[0].geometry.location.lat(), lon: results[0].geometry.location.lng()});
+            }
+            else {
+                console.log(status);
+            }
+        });
     }
 
 
