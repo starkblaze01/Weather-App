@@ -61,3 +61,7 @@ Check [SearchBar.js](/client/src/components/SearchBar.js) and [index.html](/clie
 ### Credits:
 
 <div>Icons made by <a href="https://www.flaticon.com/authors/linector" title="Linector">Linector</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+<br>
+
+P.S. I am using free-tier APIs and try to maintain the request limit under the free-tier, please try the demo wisely and generate your own API for your personal use. Liked the repo?  Hit the ⭐ Button!
