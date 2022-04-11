@@ -47,6 +47,7 @@ function App() {
 
   return (
     <div className="App" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '105vh'}}>
+      <div id="map"></div>
       <SearchBar getCoordinatesWeather={getCoordinatesWeather}/>
       <Days data={data}/>
       <Chart data={data}/>
