@@ -54,7 +54,7 @@ To get the values of `PROJECT_NUMBER`, `KEY_ID`, and `ETAG` you can run this com
 
 `gcurl https://apikeys.googleapis.com/v2/projects/PROJECT_NAME/locations/global/keys`
 
-Check [Search.js](/client/src/components/SearchBar.js) and [index.html](/client/public/index.html#L9) to see how Maps JS API were used.
+Check [SearchBar.js](/client/src/components/SearchBar.js) and [index.html](/client/public/index.html#L9) to see how Maps JS API were used.
 
 ---
 
