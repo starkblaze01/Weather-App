@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { SearchOutlined} from '@ant-design/icons';
 import debounce from 'lodash.debounce';
-import axios from 'axios';
 
 class SearchBar extends Component {
     constructor(props){
