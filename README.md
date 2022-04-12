@@ -16,7 +16,7 @@ This app was built just for the exploration purpose of ChartJS library and Googl
 
 You can check the [Chart.js](/client/src/components/Chart.js) for getting an idea how I implemented the line graph.
 
-By default it will ask for user's location permission and on approval it will populate the weather info of the user's location. Users can search for a particular location, it will show recommendation using [Google Map Autocomplete API](https://developers.google.com/maps/documentation/javascript/places-autocomplete), select the option and it will populate the weather of that place. All the weather information is being fetched via [Open Weather Map](https://openweathermap.org/api/one-call-api).
+By default it will ask for user's location permission and on approval it will populate the weather info of the user's location. If the location access is not given then it will show the weather of coordinates:`lat=33.441792 & lon=-94.037689` .Users can search for a particular location, it will show recommendation using [Google Map Autocomplete API](https://developers.google.com/maps/documentation/javascript/places-autocomplete), select the option and it will populate the weather of that place. All the weather information is being fetched via [Open Weather Map](https://openweathermap.org/api/one-call-api).
 
 ---
 
